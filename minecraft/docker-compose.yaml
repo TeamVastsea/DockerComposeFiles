@@ -1,0 +1,20 @@
+version: '3.7'
+
+networks:
+  default:
+    name: minecraft
+    external: true
+
+services:
+  bungeecord:
+    image: vastsea/mc-zulu8-python3-env:latest
+    container_name: 25565-BungeeCord
+    hostname: bungeecord
+    restart: unless-stopped
+    ports:
+      - "25565:25565"
+    volumes:
+      - ../[25565]vastseaBungeecord/:/home/[25565]BungeeCord/
+    entrypoint: /bin/bash
+    command: -c "/home/[25565]BungeeCord/a.startVastseaServer2.sh"
+    tty: true
