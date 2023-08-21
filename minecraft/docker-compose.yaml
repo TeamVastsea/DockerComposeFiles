@@ -16,5 +16,32 @@ services:
     volumes:
       - ../[25565]vastseaBungeecord/:/home/[25565]BungeeCord/
     entrypoint: /bin/bash
-    command: -c "/home/[25565]BungeeCord/a.startVastseaServer2.sh"
+    command: -c "/home/[25565]BungeeCord/launch-bungeecord.sh"
+    tty: true
+
+  login:
+    image: vastsea/mc-zulu8-python3-env:latest
+    container_name: 10000-Login
+    hostname: login
+    restart: unless-stopped
+    # ports:
+    #   - 10000:10000
+    volumes:
+      - ../[10000]vastseaLogin/:/home/[10000]Login/
+    entrypoint: /bin/bash
+    command: -c "/home/[10000]Login/launch-login.sh"
+    tty: true
+
+  build:
+    image: vastsea/mc-zulu8-python3-env:latest
+    container_name: 10001-build
+    hostname: build
+    restart: unless-stopped
+    ports:
+    #   - 10001:10001
+      - 24982:24982
+    volumes:
+      - ../[10001]vastseaServer/:/home/[100001]Build/
+    entrypoint: /bin/bash
+    command: -c "/home/[10001]Build/launch-build.sh"
     tty: true
