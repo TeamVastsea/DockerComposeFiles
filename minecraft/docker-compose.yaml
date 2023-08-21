@@ -34,7 +34,7 @@ services:
 
   build:
     image: vastsea/mc-zulu8-python3-env:latest
-    container_name: 10001-build
+    container_name: 10001-Build
     hostname: build
     restart: unless-stopped
     ports:
