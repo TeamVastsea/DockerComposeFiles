@@ -24,7 +24,7 @@ services:
       - "25565:25565"
     networks:
       minecraft:
-        - ipv4_address: 172.30.0.2
+        ipv4_address: 172.30.0.2
     volumes:
       - ../[25565]vastseaBungeecord/:/home/[25565]BungeeCord/
     entrypoint: /bin/bash
@@ -40,7 +40,7 @@ services:
     #   - 10000:10000
     networks:
       minecraft:
-        - ipv4_address: 172.30.0.3
+        ipv4_address: 172.30.0.3
     volumes:
       - ../[10000]vastseaLogin/:/home/[10000]Login/
     entrypoint: /bin/bash
@@ -57,7 +57,7 @@ services:
       - "24982:24982"
     networks:
       minecraft:
-        - ipv4_address: 172.30.0.4
+        ipv4_address: 172.30.0.4
     volumes:
       - ../[10001]vastseaServer/:/home/[100001]Build/
     entrypoint: /bin/bash
