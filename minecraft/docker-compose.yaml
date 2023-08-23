@@ -1,9 +1,18 @@
 version: '3.7'
 
 networks:
-  default:
-    name: minecraft
-    external: true
+  minecraft:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/16
+          gateway: 172.30.0.1
+
+#networks:
+#  default:
+#    name: minecraft
+#    external: true
 
 services:
   bungeecord:
@@ -13,6 +22,9 @@ services:
     restart: unless-stopped
     ports:
       - "25565:25565"
+    networks:
+      minecraft:
+        - ipv4_address: 172.30.0.2
     volumes:
       - ../[25565]vastseaBungeecord/:/home/[25565]BungeeCord/
     entrypoint: /bin/bash
@@ -26,6 +38,9 @@ services:
     restart: unless-stopped
     # ports:
     #   - 10000:10000
+    networks:
+      minecraft:
+        - ipv4_address: 172.30.0.3
     volumes:
       - ../[10000]vastseaLogin/:/home/[10000]Login/
     entrypoint: /bin/bash
@@ -39,7 +54,10 @@ services:
     restart: unless-stopped
     ports:
     #   - 10001:10001
-      - 24982:24982
+      - "24982:24982"
+    networks:
+      minecraft:
+        - ipv4_address: 172.30.0.4
     volumes:
       - ../[10001]vastseaServer/:/home/[100001]Build/
     entrypoint: /bin/bash
