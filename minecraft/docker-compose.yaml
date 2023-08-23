@@ -54,7 +54,7 @@ services:
       minecraft:
         ipv4_address: 172.30.0.4
     volumes:
-      - ../[10001]vastseaServer/:/home/[100001]Build/
+      - ../[10001]vastseaServer/:/home/[10001]Build/
       - ./PlayerTags/:/home/PlayerTags/
     entrypoint: /bin/bash
     command: -c "/home/[10001]Build/launch-build.sh"
