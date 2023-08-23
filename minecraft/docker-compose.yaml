@@ -2,17 +2,14 @@ version: '3.7'
 
 networks:
   minecraft:
+    name: minecraft
     driver: bridge
+    external: true
     ipam:
       driver: default
       config:
         - subnet: 172.30.0.0/16
           gateway: 172.30.0.1
-
-#networks:
-#  default:
-#    name: minecraft
-#    external: true
 
 services:
   bungeecord:
@@ -24,9 +21,12 @@ services:
       - "25565:25565"
     networks:
       minecraft:
+        aliases:
+         - bungeecord
         ipv4_address: 172.30.0.2
     volumes:
       - ../[25565]vastseaBungeecord/:/home/[25565]BungeeCord/
+      - ./PlayerTags/:/home/PlayerTags/
     entrypoint: /bin/bash
     command: -c "/home/[25565]BungeeCord/launch-bungeecord.sh"
     tty: true
@@ -40,9 +40,12 @@ services:
     #   - 10000:10000
     networks:
       minecraft:
+        aliases:
+          - login
         ipv4_address: 172.30.0.3
     volumes:
       - ../[10000]vastseaLogin/:/home/[10000]Login/
+      - ./PlayerTags/:/home/PlayerTags/
     entrypoint: /bin/bash
     command: -c "/home/[10000]Login/launch-login.sh"
     tty: true
@@ -57,9 +60,12 @@ services:
       - "24982:24982"
     networks:
       minecraft:
+        aliases:
+          - build
         ipv4_address: 172.30.0.4
     volumes:
       - ../[10001]vastseaServer/:/home/[100001]Build/
+      - ./PlayerTags/:/home/PlayerTags/
     entrypoint: /bin/bash
     command: -c "/home/[10001]Build/launch-build.sh"
     tty: true
