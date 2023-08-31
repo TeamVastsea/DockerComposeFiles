@@ -1,0 +1,48 @@
+version: '3.7'
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.0.0/16
+          gateway: 172.31.0.1
+
+services:
+  backend-server:
+    image: vastsea/backend-server:latest
+    container_name: 9527-BackendServer
+    hostname: backend
+    restart: unless-stopped
+    ports:
+      - "9527:9527"
+    networks:
+      backend:
+        ipv4_address: 172.31.0.2
+    volumes:
+      - /home/BackendServer/config.toml:./config.toml
+      - /home/BackendServer/log/:./log/
+    entrypoint: /bin/bash
+    command: -c "/home/BackendServer/backend_server"
+    tty: true
+    labels:
+      - "com.centurylinklabs.watchtower.scope=backend"
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: WatchTower
+    hostname: watchtower
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      backend:
+        ipv4_address: 172.31.0.3
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:./watchtower/config.json
+    command: --interval 30 --cleanup true --include-restarting true --scope backend
+    labels:
+      - "com.centurylinklabs.watchtower.scope=backend"
