@@ -7,8 +7,8 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.31.0.0/16
-          gateway: 172.31.0.1
+        - subnet: 172.32.0.0/16
+          gateway: 172.32.0.1
 
 services:
   xkball:
@@ -20,7 +20,7 @@ services:
       - "30001:30001"
     networks:
       minecraft-third-party:
-        ipv4_address: 172.31.0.2
+        ipv4_address: 172.32.0.2
     volumes:
       - ../[30001]xkball/:/home/[30001]xkball/
     entrypoint: /bin/bash
