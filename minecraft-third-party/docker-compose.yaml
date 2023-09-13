@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  minecraft-third-party:
+    name: minecraft-third-party
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.0.0/16
+          gateway: 172.31.0.1
+
+services:
+  xkball:
+    image: vastsea/mc-zulu20-python3-env:latest
+    container_name: 30001-Xkball
+    hostname: xkball
+    restart: unless-stopped
+    ports:
+      - "30001:30001"
+    networks:
+      minecraft-third-party:
+        ipv4_address: 172.31.0.2
+    volumes:
+      - ../[30001]xkball/:/home/[30001]xkball/
+    entrypoint: /bin/bash
+    command: -c "/home/[30001]xkball/launch-build.sh"
+    tty: true
