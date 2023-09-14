@@ -10,6 +10,8 @@
 │   │   ├── qqbot
 │   │   └── rabbitmq
 │   ├── docker-portainer
+│   ├── minecraft-third-party
+│   │   └── 30001-xkball
 │   └── minecraft
 │       ├── 25565-BungeeCord
 │       ├── 10000-Login
