@@ -24,5 +24,5 @@ services:
     volumes:
       - ../[30001]xkball/:/home/[30001]xkball/
     entrypoint: /bin/bash
-    command: -c "/home/[30001]xkball/launch-build.sh"
+    command: -c "/home/[30001]xkball/launch-xkball.sh"
     tty: true
