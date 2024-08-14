@@ -1,0 +1,9 @@
+services:
+  toyou-frontend:
+    image: vastsea/toyou-frontend
+    container_name: toyou-frontend
+    hostname: toyou-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    tty: true

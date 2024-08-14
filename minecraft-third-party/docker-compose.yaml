@@ -1,5 +1,3 @@
-version: '3.7'
-
 networks:
   minecraft-third-party:
     name: minecraft-third-party
