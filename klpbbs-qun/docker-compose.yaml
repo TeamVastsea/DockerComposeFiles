@@ -1,0 +1,9 @@
+services:
+  nginx:
+    image: nginx
+    container_name: klpbbs-qun
+    restart: always
+    volumes:
+      - ./data:/usr/share/nginx/html
+    ports:
+      - "40023:80"
