@@ -1,0 +1,31 @@
+networks:
+  toyou:
+    name: toyou
+
+services:
+  frontend:
+    image: registry.cn-hangzhou.aliyuncs.com/teamvastsea/toyou-frontend
+    container_name: toyou-frontend
+    hostname: toyou-frontend
+    restart: always
+    networks:
+      - toyou
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+  backend:
+    image: registry.cn-hangzhou.aliyuncs.com/teamvastsea/toyou-backend
+    container_name: toyou-backend
+    hostname: toyou-backend
+    restart: unless-stopped
+    networks:
+      - toyou
+    ports:
+      - "20005:20005"
+    volumes:
+      - ./config.toml:/usr/app/config.toml
+      - ./logs:/usr/app/logs
+      - ./files:/usr/app/files
+      - ./profile:/usr/app/profile
+      - ./trash:/usr/app/trash

@@ -39,7 +39,6 @@ services:
     networks:
       klpbbs-survey:
         ipv4_address: 172.25.0.4
-    tty: true
 
   postgresql:
     image: postgres:14
